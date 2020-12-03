@@ -14,16 +14,22 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME) : output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-main.o : main.cpp graph.h game.h interpreter.h
+main.o : main.cpp graph.h game.h interpreter.h edge.h random.h
 	$(CXX) $(CXXFLAGS) main.cpp
 
-graph.o : graph.cpp graph.h
+edge.o : edge.h
+	$(CXX) $(CXXFLAGS) edge.h
+
+random.o : random.cpp random.h
+	$(CXX) $(CXXFLAGS) random.cpp
+
+graph.o : graph.cpp graph.h edge.h random.h
 	$(CXX) $(CXXFLAGS) graph.cpp
 
-game.o : game.cpp game.h graph.h interpreter.h
+game.o : game.cpp game.h graph.h edge.h random.h
 	$(CXX) $(CXXFLAGS) game.cpp
 
-interpreter.o : interpreter.cpp interpreter.h
+interpreter.o : interpreter.cpp interpreter.h game.h graph.h edge.h random.h
 	$(CXX) $(CXXFLAGS) interpreter.cpp
 
 # Custom Clang version enforcement Makefile rule:
