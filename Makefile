@@ -51,7 +51,7 @@ output_msg: ; $(CLANG_VERSION_MSG)
 
 # Be sure to add output_msg as dependency target for your `intro` binary
 
-test: output_msg tests.o graph.o game.o interpreter.o 
+test: output_msg tests.o graph.o game.o interpreter.o
 	$(LD) tests.o graph.o game.o interpreter.o $(LDFLAGS) -o test
 
 tests.o: tests/tests.cpp tests/catch.hpp graph.h game.h interpreter.h
