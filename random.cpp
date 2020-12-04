@@ -3,6 +3,8 @@
  * Random library implementation.
  */
 
+// #include "random.h"
+
 /**
  * Constructor.
  * @param seed - seed to initialize the RNG
