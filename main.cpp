@@ -20,10 +20,10 @@ int main(int argc, char *argv[]) {
     while (getline(std::cin, input) && input != "exit") {
 
       if (init) {
-        interpreter.processStartInput(input);
+        std::cout << interpreter.processStartInput(input) << std::endl;
         init = false;
       } else {
-        interpreter.processGameInput(input);
+        std::cout << interpreter.processGameInput(input) << std::endl;
       }
 
     }

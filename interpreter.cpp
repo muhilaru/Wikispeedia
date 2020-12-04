@@ -36,10 +36,16 @@ std::string Interpreter::readFromDataset(std::string dataset_path) {
 // Create random game with maximum path length
 void Interpreter::createGame(int length) {
 
+    Game game;
+    game_ = &game;
+
 };
 
 // Create game starting at a specific title and ending at a specific title
 void Interpreter::createGame(Vertex start, Vertex end) {
+
+    Game game(start, end);
+    game_ = &game;
 
 };
 
@@ -50,5 +56,5 @@ std::string Interpreter::getValidPathsStr() {
 
 // Prints out current vertex state (Different if you are at beginning or ending node)
 std::string Interpreter::getCurrentVertexStr() {
-    return COMMAND_INVALID;
+    return game_->getCurrVertex();
 };

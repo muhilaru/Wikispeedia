@@ -62,18 +62,29 @@ bool Game::moveTo(Vertex to) {
 
 // Returns true if a vertex was popped off the stack
 bool Game::moveBack() {
+
+    if (!path_taken_.empty()) {
+        path_taken_.pop();
+        current_ = path_taken_.top();
+    }
+
     return false;
 };
 
 // Returns true if at the final node
 bool Game::isComplete() {
-    return false;
+    return current_ == end_;
 };
 
 // Returns true if at the beginning node
 bool Game::isAtStart() {
-    return false;
+    return current_ == start_;
 };
+
+// Returns the current vertex
+string Game::getCurrVertex() {
+    return current_;
+}
 
 //================================================================================
 // Private functions.

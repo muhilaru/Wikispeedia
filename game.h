@@ -37,6 +37,8 @@ class Game {
         bool isComplete();
         // Returns true if at the beginning node
         bool isAtStart();
+        // Return current vertex
+        string getCurrVertex();
 	private:
 		Vertex start_;
 		Vertex end_;
