@@ -12,6 +12,10 @@ Game::Game() {
 // Creates game from predefined start and end.
 Game::Game(Vertex start, Vertex end) {
 
+    start_ = start;
+    current_ = start;
+    end_ = end;
+
 };
 
 // uses existing matrix to calculate shortest path between start and end using Floyd
@@ -31,11 +35,13 @@ void Game::readAdjacencyMatrix(string matrix_path) {
 
 // Adds a vertex to the graph
 void Game::addPage(Vertex vert) {
+    graph_->insertVertex(vert);
 
 };
 
 // Adds an edge to the graph
 void Game::addLink(Vertex from, Vertex to) {
+    graph_->insertEdge(from, to);
 
 };
 
