@@ -79,7 +79,7 @@ void Game::addLink(Vertex from, Vertex to) {
 
 // Returns a list of all of the 
 std::vector<Vertex> Game::getValidPaths() {
-    return std::vector<Vertex>();
+    return graph_.getAdjacent(current_);
 };
 
 // Use iterative deepening DFS to find the most optimal path.
@@ -89,6 +89,11 @@ std::vector<Edge> Game::getOptimiumPath() {
 
 // Attempt to move to a specific page. Return true if moved to valid page.
 bool Game::moveTo(Vertex to) {
+    if (graph_.edgeExists(current_, to)) {
+        current_ = to;
+        path_taken_.push(to);
+        return true;
+    }
     return false;
 };
 
@@ -98,6 +103,7 @@ bool Game::moveBack() {
     if (!path_taken_.empty()) {
         path_taken_.pop();
         current_ = path_taken_.top();
+        return true;
     }
 
     return false;
