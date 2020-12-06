@@ -40,9 +40,17 @@ class Game {
         // Return current vertex
         string getCurrVertex();
 	private:
+
 		Vertex start_;
 		Vertex end_;
 		Vertex current_;
 		Graph* graph_;
 		std::stack<Vertex> path_taken_;
+
+        const int INF = 1e7;
+        //for generateMatrix() -- chan
+        std::vector<std::vector<int>> dist_matrix;
+
+        //I need the articles in order to use the indices for generateMatrix() -- chan
+        std::vector<Vertex> articles;
 };

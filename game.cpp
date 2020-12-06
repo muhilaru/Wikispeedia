@@ -26,6 +26,34 @@ void Game::calculateShortestPath() {
 // Create matrix based on graph’s current state using Floyd Warshall’s Algorithm
 void Game::generateMatrix() {
 
+    int size = articles.size();
+
+    dist_matrix.resize(size, std::vector<int>(size, INF));
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (i == j) {
+                dist_matrix.at(i).at(i) = 0;
+                continue;
+            }
+            Vertex begin = articles.at(i);
+            Vertex end = articles.at(j);
+            if (graph_->edgeExists(begin, end)) {
+                dist_matrix.at(i).at(j) = 1;
+            }
+        }
+    }
+
+    for (int k = 0; k < size; k++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+
+                if (dist_matrix.at(i).at(k) + dist_matrix.at(k).at(j) < dist_matrix.at(i).at(j)) {
+                    dist_matrix.at(i).at(j) = dist_matrix.at(i).at(k) + dist_matrix.at(k).at(j);
+                }
+            }
+        }
+    }
 };
 
 // Reads in generated adjacency matrix
@@ -36,6 +64,9 @@ void Game::readAdjacencyMatrix(string matrix_path) {
 // Adds a vertex to the graph
 void Game::addPage(Vertex vert) {
     graph_->insertVertex(vert);
+
+    //I need articles to be pushed in the order or the articles.tsv --chan
+    articles.push_back(vert);
 
 };
 
