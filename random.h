@@ -21,6 +21,8 @@ using std::vector;
 class Random
 {
   public:
+
+    inline Random();
     /**
      * Constructor.
      * @param seed - seed to initialize the RNG

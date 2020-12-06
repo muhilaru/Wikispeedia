@@ -18,7 +18,7 @@ class Game {
         // uses existing matrix to calculate shortest path between start and end using Floyd
         void calculateShortestPath();
         // Create matrix based on graph’s current state using Floyd Warshall’s Algorithm
-        std::vector<std::vector<int>> generateMatrix(Graph * graph, std::vector<Vertex> articles);
+        std::vector<std::vector<int>> generateMatrix(Graph graph, std::vector<Vertex> articles);
         // Reads in generated adjacency matrix
         void readAdjacencyMatrix(string matrix_path);
         // Adds a vertex to the graph
@@ -40,7 +40,7 @@ class Game {
         // Return current vertex
         string getCurrVertex();
 
-        Graph * getGraph();
+        Graph getGraph();
 
         std::vector<Vertex> getArticles();
 	private:
@@ -48,7 +48,7 @@ class Game {
 		Vertex start_;
 		Vertex end_;
 		Vertex current_;
-		Graph* graph_;
+		Graph graph_;
 		std::stack<Vertex> path_taken_;
 
         const int INF = 1e7;

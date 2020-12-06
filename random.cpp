@@ -5,6 +5,10 @@
 
 // #include "random.h"
 
+Random::Random() {
+
+}
+
 /**
  * Constructor.
  * @param seed - seed to initialize the RNG

@@ -33,7 +33,7 @@ TEST_CASE("generateMatrix Basic Case") {
   std::cout << "ADDED LINKS" << std::endl;
 
   std::vector<Vertex> articles = game.getArticles();
-  Graph * graph = game.getGraph();
+  Graph graph = game.getGraph();
 
   std::cout << articles.size() << std::endl;
 

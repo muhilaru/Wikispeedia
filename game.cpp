@@ -24,7 +24,7 @@ void Game::calculateShortestPath() {
 };
 
 // Create matrix based on graph’s current state using Floyd Warshall’s Algorithm
-std::vector<std::vector<int>> Game::generateMatrix(Graph * graph_, std::vector<Vertex> articles) {
+std::vector<std::vector<int>> Game::generateMatrix(Graph graph_, std::vector<Vertex> articles) {
 
     int size = articles.size();
 
@@ -38,7 +38,7 @@ std::vector<std::vector<int>> Game::generateMatrix(Graph * graph_, std::vector<V
             }
             Vertex begin = articles.at(i);
             Vertex end = articles.at(j);
-            if (graph_->edgeExists(begin, end)) {
+            if (graph_.edgeExists(begin, end)) {
                 dist_matrix.at(i).at(j) = 1;
             }
         }
@@ -64,7 +64,7 @@ void Game::readAdjacencyMatrix(string matrix_path) {
 
 // Adds a vertex to the graph
 void Game::addPage(Vertex vert) {
-    graph_->insertVertex(vert);
+    graph_.insertVertex(vert);
 
     //I need articles to be pushed in the order or the articles.tsv --chan
     articles.push_back(vert);
@@ -73,7 +73,7 @@ void Game::addPage(Vertex vert) {
 
 // Adds an edge to the graph
 void Game::addLink(Vertex from, Vertex to) {
-    graph_->insertEdge(from, to);
+    graph_.insertEdge(from, to);
 
 };
 
@@ -118,7 +118,7 @@ string Game::getCurrVertex() {
     return current_;
 }
 
-Graph * Game::getGraph() {
+Graph Game::getGraph() {
     return graph_;
 }
 
