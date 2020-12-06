@@ -7,7 +7,7 @@ const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex,
 
 Graph::Graph() {
     weighted = false;
-    directed = false;
+    directed = true;
 }
 
 Graph::Graph(bool weighted) : weighted(weighted),directed(false),random(Random(0))
