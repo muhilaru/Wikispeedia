@@ -35,9 +35,11 @@ TEST_CASE("generateMatrix Basic Case") {
   std::vector<Vertex> articles = game.getArticles();
   Graph graph = game.getGraph();
 
-  std::cout << articles.size() << std::endl;
-
   const int INF = 1e7;
+
+  for (int i = 0; i < (int)articles.size(); i++) {
+    std::cout<< articles.at(i) << std::endl;
+  }
 
   std::vector<std::vector<int>> expected {
 
@@ -50,7 +52,6 @@ TEST_CASE("generateMatrix Basic Case") {
 
   std::vector<std::vector<int>> actual = game.generateMatrix(graph, articles);
 
-  std::cout << actual.size() << std::endl;
 
   REQUIRE(actual == expected);
 
