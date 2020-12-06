@@ -118,6 +118,14 @@ string Game::getCurrVertex() {
     return current_;
 }
 
+Graph * Game::getGraph() {
+    return graph_;
+}
+
+std::vector<Vertex> Game::getArticles() {
+    return articles;
+}
+
 //================================================================================
 // Private functions.
 //================================================================================

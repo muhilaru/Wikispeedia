@@ -39,6 +39,10 @@ class Game {
         bool isAtStart();
         // Return current vertex
         string getCurrVertex();
+
+        Graph * getGraph();
+
+        std::vector<Vertex> getArticles();
 	private:
 
 		Vertex start_;
