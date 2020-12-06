@@ -24,7 +24,7 @@ void Game::calculateShortestPath() {
 };
 
 // Create matrix based on graph’s current state using Floyd Warshall’s Algorithm
-void Game::generateMatrix() {
+std::vector<std::vector<int>> Game::generateMatrix(Graph * graph_, std::vector<Vertex> articles) {
 
     int size = articles.size();
 
@@ -54,6 +54,7 @@ void Game::generateMatrix() {
             }
         }
     }
+    return dist_matrix;
 };
 
 // Reads in generated adjacency matrix
