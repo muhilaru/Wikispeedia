@@ -25,7 +25,15 @@ std::string Interpreter::processGameInput(std::string input) {
 };
 
 // Add all vertices and edges from dataset into game/graph.
-std::string Interpreter::readFromDataset(std::string dataset_path) {
+//need to take in articles.tsv and links.tsv so I added one extra param
+std::string Interpreter::readFromDataset(std::string articles_path, std::string links_path) {
+
+    //to keep track of the index of articles as you're adding them
+    int count = 0;
+
+    //is this where you call game.addPage(vertex, count)?
+
+
     return COMMAND_INVALID;
 };
 

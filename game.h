@@ -4,6 +4,7 @@
 #include "edge.h"
 #include <stack>
 #include <vector>
+#include <map>
 
 /**
 // The Game class keeps track of the user's movement throughout the graph, allowing them to traverse 
@@ -22,7 +23,7 @@ class Game {
         // Reads in generated adjacency matrix
         void readAdjacencyMatrix(string matrix_path);
         // Adds a vertex to the graph
-        void addPage(Vertex vert);
+        void addPage(Vertex vert, int &count);
         // Adds an edge to the graph
         void addLink(Vertex from, Vertex to);
         // Returns a list of all of the 
@@ -57,4 +58,6 @@ class Game {
 
         //I need the articles in order to use the indices for generateMatrix() -- chan
         std::vector<Vertex> articles;
+
+        std::map<Vertex, int> page_map;
 };

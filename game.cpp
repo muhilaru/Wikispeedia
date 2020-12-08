@@ -63,11 +63,17 @@ void Game::readAdjacencyMatrix(string matrix_path) {
 };
 
 // Adds a vertex to the graph
-void Game::addPage(Vertex vert) {
+void Game::addPage(Vertex vert, int &count) {
     graph_.insertVertex(vert);
 
     //I need articles to be pushed in the order or the articles.tsv --chan
     articles.push_back(vert);
+
+    //stores page to its index
+    page_map.emplace(vert, count);
+
+    //to  update the index to the next value
+    count++;
 
 };
 

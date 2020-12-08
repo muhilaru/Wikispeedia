@@ -17,7 +17,7 @@ class Interpreter {
         // Takes the input during the game. Returns the output to the command line.
         std::string processGameInput(std::string input);
         // Add all vertices and edges from dataset into game/graph. Returns the output to the command line.
-        std::string readFromDataset(std::string dataset_path);
+        std::string readFromDataset(std::string articles_path, std::string links_path);
 	private:
 		Game* game_;
 
