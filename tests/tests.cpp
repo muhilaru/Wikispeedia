@@ -14,11 +14,9 @@ TEST_CASE("generateMatrix Simple") {
 
   Game game("Color", "Leprechaun");
 
-  int count = 0;
-
-  game.addPage("Color", count);
-  game.addPage("Rainbow", count);
-  game.addPage("Leprechaun", count);
+  game.addPage("Color");
+  game.addPage("Rainbow");
+  game.addPage("Leprechaun");
 
   game.addLink("Color", "Rainbow");
   game.addLink("Rainbow", "Leprechaun");
@@ -44,13 +42,11 @@ TEST_CASE("generateMatrix Basic Case") {
 
   Game game("Color", "Leprechaun");
 
-  int count = 0;
-
-  game.addPage("Chan", count);
-  game.addPage("Color", count);
-  game.addPage("Forest", count);
-  game.addPage("Rainbow", count);
-  game.addPage("Leprechaun", count);
+  game.addPage("Chan");
+  game.addPage("Color");
+  game.addPage("Forest");
+  game.addPage("Rainbow");
+  game.addPage("Leprechaun");
 
   game.addLink("Chan", "Forest");
   game.addLink("Chan", "Leprechaun");
@@ -81,12 +77,10 @@ TEST_CASE("generateMatrix Complex Cycles Case") {
 
   Game game("Blue", "Purple");
 
-  int count = 0;
-
-  game.addPage("Blue", count);
-  game.addPage("Red", count);
-  game.addPage("Green", count);
-  game.addPage("Purple", count);
+  game.addPage("Blue");
+  game.addPage("Red");
+  game.addPage("Green");
+  game.addPage("Purple");
 
   game.addLink("Blue", "Red");
   game.addLink("Red", "Blue");

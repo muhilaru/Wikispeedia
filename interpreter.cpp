@@ -28,12 +28,6 @@ std::string Interpreter::processGameInput(std::string input) {
 //need to take in articles.tsv and links.tsv so I added one extra param
 std::string Interpreter::readFromDataset(std::string articles_path, std::string links_path) {
 
-    //to keep track of the index of articles as you're adding them
-    int count = 0;
-
-    //is this where you call game.addPage(vertex, count)?
-
-
     return COMMAND_INVALID;
 };
 

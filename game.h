@@ -23,7 +23,7 @@ class Game {
         // Reads in generated adjacency matrix
         void readAdjacencyMatrix(string matrix_path);
         // Adds a vertex to the graph
-        void addPage(Vertex vert, int &count);
+        void addPage(Vertex vert);
         // Adds an edge to the graph
         void addLink(Vertex from, Vertex to);
         // Returns a list of all of the 
