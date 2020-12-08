@@ -12,14 +12,29 @@ Game::Game() {
 // Creates game from predefined start and end.
 Game::Game(Vertex start, Vertex end) {
 
-    start_ = start;
-    current_ = start;
-    end_ = end;
+    int start_index = page_map[start];
+    int end_index = page_map[end];
+
+    if (dist_matrix[start_index][end_index] <= max) {
+
+        start_ = start;
+        current_ = start;
+        end_ = end;
+
+        path_taken_.push(start);
+    } else {
+        std::cout << "The length of most optimal path for the game you specified exceeds the maximum length threshold of " << max << "." << std::endl;
+        std::cout << "A random game will now be created." << std::endl;
+    }
 
 };
 
 // uses existing matrix to calculate shortest path between start and end using Floyd
-void Game::calculateShortestPath() {
+int Game::calculateShortestPath() {
+
+    int start_index = page_map[start_];
+    int end_index = page_map[end_];
+    return dist_matrix[start_index][end_index];
 
 };
 

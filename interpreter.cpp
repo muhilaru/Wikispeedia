@@ -53,7 +53,18 @@ void Interpreter::createGame(Vertex start, Vertex end) {
 
 // Prints out valid paths to console
 std::string Interpreter::getValidPathsStr() {
-    return COMMAND_INVALID;
+
+    string list_of_paths = "";
+    for (unsigned k = 0; k < game_->getValidPaths().size(); k++) {
+        list_of_paths += game_->getValidPaths()[k];
+        
+        if (k != game_->getValidPaths().size() - 1) {
+            list_of_paths += "\n";
+        }
+
+    }
+    
+    return list_of_paths;
 };
 
 // Prints out current vertex state (Different if you are at beginning or ending node)

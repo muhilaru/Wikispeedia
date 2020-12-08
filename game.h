@@ -17,7 +17,7 @@ class Game {
         // Creates game from predefined start and end.
         Game(Vertex start, Vertex end);
         // uses existing matrix to calculate shortest path between start and end using Floyd
-        void calculateShortestPath();
+        int calculateShortestPath();
         // Create matrix based on graph’s current state using Floyd Warshall’s Algorithm
         std::vector<std::vector<int>> generateMatrix(Graph graph, std::vector<Vertex> articles);
         // Reads in generated adjacency matrix
@@ -51,6 +51,9 @@ class Game {
 		Vertex current_;
 		Graph graph_;
 		std::stack<Vertex> path_taken_;
+
+        // the maximum length of the most optimal path from start to end (used when creating a new game)
+        int max = 20;
 
         const int INF = 1e7;
         //for generateMatrix() -- chan
