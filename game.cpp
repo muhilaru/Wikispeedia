@@ -165,9 +165,39 @@ std::vector<Vertex> Game::getValidPaths() {
     return graph_.getAdjacent(current_);
 };
 
+bool Game::IDDFS(Vertex begin, int maxDepth) {
+   // static std::unordered_set<Vertex> visited_;
+
+    if (begin == end_) {
+            optimal_path_taken_.push_back(begin);
+            return true;
+            
+    } 
+    if (maxDepth == 0) {
+        return false;
+    } else if (maxDepth > 0) {
+        auto adjNodes = graph_.getAdjacent(begin);
+        for (int i = 0; i < adjNodes.size(); i++) {
+            if (IDDFS(adjNodes[i], maxDepth - 1)) {
+                optimal_path_taken_.push_back(adjNodes[i]);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    } 
+
+    return true;
+}
+
 // Use iterative deepening DFS to find the most optimal path.
-std::vector<Edge> Game::getOptimiumPath() {
-    return std::vector<Edge>();
+
+std::vector<Vertex> Game::getOptimiumPath(int maxDepth) {
+    int start_ind = page_map[start_];
+    int end_ind = page_map[end_];
+    IDDFS(start_, dist_matrix[start_ind][end_ind]);
+
+    return optimal_path_taken_;
 };
 
 // Attempt to move to a specific page. Return true if moved to valid page.
