@@ -7,29 +7,27 @@
 
 // Creates game from random beginning and end.
 Game::Game() {
-
-    createRandomGame();
     
 };
 
 // Creates game from predefined start and end.
 Game::Game(Vertex start, Vertex end) {
 
-    int start_index = page_map[start];
-    int end_index = page_map[end];
+    // int start_index = page_map[start];
+    // int end_index = page_map[end];
 
-    if (dist_matrix[start_index][end_index] <= max) {
+    // if (dist_matrix[start_index][end_index] <= max) {
 
-        start_ = start;
-        current_ = start;
-        end_ = end;
+    //     start_ = start;
+    //     current_ = start;
+    //     end_ = end;
 
-        path_taken_.push(start);
-    } else {
-        std::cout << "The length of most optimal path for the game you specified exceeds the maximum length threshold of " << max << "." << std::endl;
-        std::cout << "A random game will now be created." << std::endl;
-        createRandomGame();
-    }
+    //     path_taken_.push(start);
+    // } else {
+    //     std::cout << "The length of most optimal path for the game you specified exceeds the maximum length threshold of " << max << "." << std::endl;
+    //     std::cout << "A random game will now be created." << std::endl;
+    //     createRandomGame();
+    // }
 
 };
 
@@ -39,13 +37,8 @@ void Game::createRandomGame() {
     generateMatrix(graph_, articles);
     int random = rand() % articles.size();
 
-
-    // int start_i = random / dist_matrix.size();
-    // int start_j = random % dist_matrix[0].size();
-
     int reserve_i = -1;
     int reserve_j = -1;
-
 
     int index = 0;
     for (unsigned i = 0; i < dist_matrix.size(); i++) {
@@ -76,10 +69,7 @@ void Game::createRandomGame() {
         }
     }
 
-    if (reserve_i == -1 && reserve_j == -1) {
-        std::cout << "No valid games exist with the specified maximum optimal path length" << std::endl;
-    } else {
-
+    if (reserve_i != -1 && reserve_j != -1) {
         for (auto it = page_map.begin(); it != page_map.end(); it++) {
             if (it->second == reserve_i) {
                 start_ = it->first;
@@ -90,7 +80,12 @@ void Game::createRandomGame() {
         }
 
         path_taken_.push(start_);
+        return;
 
+    } else {
+
+        max = 20;
+        createRandomGame();
     }
 
 };
@@ -243,6 +238,10 @@ Graph Game::getGraph() {
 
 std::vector<Vertex> Game::getArticles() {
     return articles;
+}
+
+void Game::setMax(int m) {
+    max = m;
 }
 
 //================================================================================

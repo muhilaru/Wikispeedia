@@ -40,14 +40,15 @@ void Interpreter::createGame(int length) {
 
     Game game;
     game_ = &game;
+    game_->setMax(length);
 
 };
 
 // Create game starting at a specific title and ending at a specific title
 void Interpreter::createGame(Vertex start, Vertex end) {
 
-    Game game(start, end);
-    game_ = &game;
+    // Game game(start, end);
+    // game_ = &game;
 
 };
 
