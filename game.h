@@ -63,4 +63,7 @@ class Game {
         std::vector<Vertex> articles;
 
         std::map<Vertex, int> page_map;
+
+        // helper function to create random Game
+        void createRandomGame();
 };

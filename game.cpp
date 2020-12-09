@@ -1,4 +1,5 @@
 #include "game.h"
+#include <cmath>
 
 //================================================================================
 // Public functions.
@@ -7,6 +8,8 @@
 // Creates game from random beginning and end.
 Game::Game() {
 
+    createRandomGame();
+    
 };
 
 // Creates game from predefined start and end.
@@ -25,6 +28,69 @@ Game::Game(Vertex start, Vertex end) {
     } else {
         std::cout << "The length of most optimal path for the game you specified exceeds the maximum length threshold of " << max << "." << std::endl;
         std::cout << "A random game will now be created." << std::endl;
+        createRandomGame();
+    }
+
+};
+
+// helper function to create random Game
+void Game::createRandomGame() {
+
+    generateMatrix(graph_, articles);
+    int random = rand() % articles.size();
+
+
+    // int start_i = random / dist_matrix.size();
+    // int start_j = random % dist_matrix[0].size();
+
+    int reserve_i = -1;
+    int reserve_j = -1;
+
+
+    int index = 0;
+    for (unsigned i = 0; i < dist_matrix.size(); i++) {
+        for (unsigned j = 0; j < dist_matrix[i].size(); j++) {
+            index++;
+
+            if (index >= random && dist_matrix[i][j] <= max) {
+               
+
+               for (auto it = page_map.begin(); it != page_map.end(); it++) {
+                   if (it->second == (int) i) {
+                       start_ = it->first;
+                       current_ = start_;
+                   } else if (it->second == (int) j) {
+                       end_ = it->first;
+                   }
+               }
+
+               path_taken_.push(start_);
+
+               return;
+
+
+            } else if (dist_matrix[i][j] <= max) {
+                reserve_i = i;
+                reserve_j = j;
+            }
+        }
+    }
+
+    if (reserve_i == -1 && reserve_j == -1) {
+        std::cout << "No valid games exist with the specified maximum optimal path length" << std::endl;
+    } else {
+
+        for (auto it = page_map.begin(); it != page_map.end(); it++) {
+            if (it->second == reserve_i) {
+                start_ = it->first;
+                current_ = start_;
+            } else if (it->second == reserve_j) {
+                end_ = it->first;
+            }
+        }
+
+        path_taken_.push(start_);
+
     }
 
 };
