@@ -109,3 +109,109 @@ TEST_CASE("generateMatrix Complex Cycles Case") {
 
   REQUIRE(actual == expected);
 }
+TEST_CASE("Iterative DFS Test- Easy") {
+  Game game("A", "E");
+
+  game.addPage("A");
+  game.addPage("B");
+  game.addPage("C");
+  game.addPage("D");
+  game.addPage("E");
+
+
+  game.addLink("A", "B");
+  game.addLink("B", "C");
+  game.addLink("C", "D");
+  game.addLink("D", "E");
+
+  
+  Graph graph = game.getGraph();
+
+  std::vector<Vertex> temp = game.getOptimumPath(4);
+  
+
+  REQUIRE(temp[0] == "A");
+  REQUIRE(temp[1] == "B");
+  REQUIRE(temp[2] == "C");
+  REQUIRE(temp[3] == "D");
+  REQUIRE(temp[4] == "E");
+
+}
+
+TEST_CASE("Iterative DFS Test- Difficult") {
+  Game game("A", "J");
+
+  game.addPage("A");
+  game.addPage("B");
+  game.addPage("C");
+  game.addPage("D");
+  game.addPage("E");
+  game.addPage("F");
+  game.addPage("G");
+  game.addPage("H");
+  game.addPage("I");
+  game.addPage("J");
+
+  game.addLink("A", "B");
+  game.addLink("B", "C");
+  game.addLink("C", "D");
+  game.addLink("D", "C");
+  game.addLink("D", "A");
+  game.addLink("E", "D");
+  game.addLink("F", "E");
+  game.addLink("B", "F");
+  game.addLink("F", "H");
+  game.addLink("H", "I");
+  game.addLink("H", "J");
+
+
+  
+  Graph graph = game.getGraph();
+
+  std::vector<Vertex> temp = game.getOptimumPath(4);
+  
+
+  REQUIRE(temp[0] == "A");
+  REQUIRE(temp[1] == "B");
+  REQUIRE(temp[2] == "F");
+  REQUIRE(temp[3] == "H");
+  REQUIRE(temp[4] == "J");
+
+}
+
+TEST_CASE("Iterative DFS Test- Edge Case") {
+  Game game("A", "J");
+
+  game.addPage("A");
+  game.addPage("B");
+  game.addPage("C");
+  game.addPage("D");
+  game.addPage("E");
+  game.addPage("F");
+  game.addPage("G");
+  game.addPage("H");
+  game.addPage("I");
+  game.addPage("J");
+
+  game.addLink("A", "B");
+  game.addLink("B", "C");
+  game.addLink("C", "D");
+  game.addLink("D", "C");
+  game.addLink("D", "A");
+  game.addLink("E", "D");
+  game.addLink("F", "E");
+  game.addLink("B", "F");
+  game.addLink("F", "H");
+  game.addLink("H", "I");
+  game.addLink("H", "J");
+
+
+  
+  Graph graph = game.getGraph();
+
+  std::vector<Vertex> temp = game.getOptimumPath(3);
+  
+
+  REQUIRE(temp.size() == 0);
+
+}
