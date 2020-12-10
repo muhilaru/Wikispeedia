@@ -28,6 +28,8 @@ Game::Game(Vertex start, Vertex end) {
     //     std::cout << "A random game will now be created." << std::endl;
     //     createRandomGame();
     // }
+    start_ = start;
+    end_ = end;
 
 };
 
