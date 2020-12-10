@@ -16,7 +16,10 @@ Interpreter::Interpreter() {
 std::string Interpreter::processStartInput(std::string input) {
     if (input == "start") {
         createGame(MIN_GAME_SIZE);
+        std::cout << "Reading dataset..." << std::endl;
         readFromDataset("data/articles.tsv", "data/links.tsv");
+        std::cout << "Reading Floyd-Warshall Matrix..." << std::endl;
+        readAdjacencyMatrix("data/shortest-path-distance-matrix.txt");
         return "Created game.";
     } else {
         return COMMAND_INVALID;
@@ -51,6 +54,16 @@ std::string Interpreter::readFromDataset(std::string articles_path, std::string 
         }
     }
     return COMMAND_INVALID;
+};
+
+std::string Interpreter::readAdjacencyMatrix(std::string matrix_path) {
+    std::ifstream matrix(matrix_path);
+    std::string line;
+    while (std::getline(matrix, line)) {
+        if (line.size() > 0 && line[0] != '#') {
+            std::cout << line << std::endl;
+        }
+    }
 };
 
 //================================================================================
