@@ -46,8 +46,10 @@ class Game {
         bool isAtStart();
         // Return current vertex
         string getCurrVertex();
-
+        // Returns current graph
         Graph getGraph();
+        //Resets instances variables to setup for a new game
+        void resetGameState();
 
         std::vector<Vertex> getArticles();
 	private:

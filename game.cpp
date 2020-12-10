@@ -235,6 +235,14 @@ void Game::setMax(int m) {
     max = m;
 }
 
+void Game::resetGameState() {
+
+    path_taken_ = std::stack<Vertex>();
+    optimal_path_taken_.clear();
+    createRandomGame();
+
+}
+
 //================================================================================
 // Private functions.
 //================================================================================
