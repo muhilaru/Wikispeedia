@@ -59,9 +59,13 @@ std::string Interpreter::readFromDataset(std::string articles_path, std::string 
 std::string Interpreter::readAdjacencyMatrix(std::string matrix_path) {
     std::ifstream matrix(matrix_path);
     std::string line;
+    int y = 0;
     while (std::getline(matrix, line)) {
         if (line.size() > 0 && line[0] != '#') {
-            std::cout << line << std::endl;
+            for (int x = 0; x < line.size(); x++){
+                game_->setMatrixEntry(x, y, line[x]);
+            }
+            y++;
         }
     }
     return COMMAND_INVALID;

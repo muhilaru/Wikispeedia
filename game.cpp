@@ -288,6 +288,17 @@ void Game::resetGameState() {
 
 }
 
+void Game::setMatrixEntry(int x, int y, char val) {
+    int size = articles.size();
+    if (dist_matrix.size() != size || dist_matrix[0].size() != size) {
+        dist_matrix.resize(size, std::vector<int>(size, INF));
+    }
+    if (val != '_') {
+        dist_matrix[x][y] = val - '0';
+    }
+};
+
+
 //================================================================================
 // Private functions.
 //================================================================================

@@ -52,8 +52,10 @@ class Game {
         Graph getGraph();
         //Resets instances variables to setup for a new game
         void resetGameState();
-        
+
         void matrixToFile(std::vector<std::vector<int>> matrix);
+
+        void setMatrixEntry(int x, int y, char val);
 
         std::vector<Vertex> getArticles();
 	private:
