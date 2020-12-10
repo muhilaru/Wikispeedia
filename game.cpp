@@ -153,19 +153,21 @@ std::vector<Vertex> Game::getValidPaths() {
 
 bool Game::IDDFS(Vertex begin, int maxDepth) {
    // static std::unordered_set<Vertex> visited_;
+  //  std::cout << begin << std::endl;
+    //std::cout << maxDepth << std::endl;
 
     if (begin == end_) {
-            optimal_path_taken_.push_back(begin);
+           // optimal_path_taken_.push_back(begin);
             return true;
             
     } 
     if (maxDepth == 0) {
         return false;
-    } else if (maxDepth > 0) {
+    } else if (maxDepth >= 0) {
         auto adjNodes = graph_.getAdjacent(begin);
-        for (int i = 0; i < adjNodes.size(); i++) {
+        for (unsigned i = 0; i < adjNodes.size(); i++) {
             if (IDDFS(adjNodes[i], maxDepth - 1)) {
-                optimal_path_taken_.push_back(adjNodes[i]);
+                optimal_path_taken_.push(adjNodes[i]);
                 return true;
             } else {
                 return false;
@@ -178,13 +180,36 @@ bool Game::IDDFS(Vertex begin, int maxDepth) {
 
 // Use iterative deepening DFS to find the most optimal path.
 
-std::vector<Vertex> Game::getOptimiumPath(int maxDepth) {
+std::vector<Vertex> Game::getOptimumPath(int max_depth) {
+    // int start_ind = page_map[start_];
+    // int end_ind = page_map[end_];
+   
+
+   
+    IDDFS(start_, max_depth);
+    if (optimal_path_taken_.empty()) {
+        return std::vector<Vertex>();
+    }
+
+     std::vector<Vertex> ret;
+    ret.push_back(start_);
+
+    while (!optimal_path_taken_.empty()) {
+        
+        ret.push_back(optimal_path_taken_.top());
+        optimal_path_taken_.pop();
+        
+    }
+
+    return ret;
+};
+
+std::vector<Vertex> Game::getOptimumPath() {
     int start_ind = page_map[start_];
     int end_ind = page_map[end_];
-    IDDFS(start_, dist_matrix[start_ind][end_ind]);
-
-    return optimal_path_taken_;
-};
+    int max_depth = dist_matrix[start_ind][end_ind];
+    return getOptimumPath(max_depth);
+}
 
 // Attempt to move to a specific page. Return true if moved to valid page.
 bool Game::moveTo(Vertex to) {
