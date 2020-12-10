@@ -32,6 +32,8 @@ class Game {
         void addLink(Vertex from, Vertex to);
         // Returns a list of all of the 
         std::vector<Vertex> getValidPaths();
+        // Returns the destination title
+        std::string getDestination();
        //Helper function of iteration deepening DFS
         bool IDDFS(Vertex begin, int maxDepth);
         //(TEST) Use iterative deepening DFS to find the most optimal path.
@@ -67,7 +69,7 @@ class Game {
 		std::stack<Vertex> path_taken_;
 
         // the maximum length of the most optimal path from start to end (used when creating a new game)
-        int max = 20;
+        int max = 10;
 
         const int INF = 1e7;
         //for generateMatrix() -- chan

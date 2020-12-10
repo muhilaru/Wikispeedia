@@ -9,7 +9,9 @@ int main(int argc, char *argv[]) {
     argc = 0;
     argv = nullptr;
 
-    std::cout << "Welcome to WikiSpeedia! Enter start to begin your game." << std::endl;
+    std::cout << "[Wikispeedia] Welcome to Wikispeedia! Please type one of these commands EXACTLY to continue!" << std::endl;
+    std::cout << "[Wikispeedia] GENERATE - Generates an adjacency matrix using the Floyd-Warshall algorithm. Will take a VERY VERY long time (30 minutes)." << std::endl;
+    std::cout << "[Wikispeedia] READ - Reads in an adjacency matrix from a file, and starts the game. Super fast to start (3 seconds)." << std::endl;
 
     string input;
     

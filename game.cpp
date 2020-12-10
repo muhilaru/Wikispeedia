@@ -1,5 +1,6 @@
 #include "game.h"
 #include <cmath>
+#include <ctime>
 
 //================================================================================
 // Public functions.
@@ -35,52 +36,17 @@ Game::Game(Vertex start, Vertex end) {
 
 // helper function to create random Game
 void Game::createRandomGame() {
-
-    generateMatrix(graph_, articles);
-    int random = rand() % articles.size();
-
-    int reserve_i = -1;
-    int reserve_j = -1;
-
-    int index = 0;
-    for (unsigned i = 0; i < dist_matrix.size(); i++) {
-        for (unsigned j = 0; j < dist_matrix[i].size(); j++) {
-            index++;
-
-            if (index >= random && dist_matrix[i][j] <= max) {
-               
-                start_ = articles.at(i);
-                current_ = start_;
-                end_ = articles.at(j);
-
-               path_taken_.push(start_);
-
-               return;
-
-
-            } else if (dist_matrix[i][j] <= max) {
-                reserve_i = i;
-                reserve_j = j;
-            }
-        }
+    srand(time(NULL));
+    int a = rand() % articles.size();
+    int b = rand() % articles.size();
+    std::cout << a << "," << b << std::endl;
+    while (a == b || dist_matrix[a][b] > max) {
+        a = rand() % articles.size();
+        b = rand() % articles.size();
     }
-
-    if (reserve_i != -1 && reserve_j != -1) {
-
-        start_ = articles.at(reserve_i);
-        current_ = start_;
-        end_ = articles.at(reserve_j);
-        
-
-        path_taken_.push(start_);
-        return;
-
-    } else {
-
-        max = 20;
-        createRandomGame();
-    }
-
+    start_ = articles.at(a);
+    end_ = articles.at(b);
+    current_ = articles.at(a);
 };
 
 // uses existing matrix to calculate shortest path between start and end using Floyd
@@ -298,6 +264,9 @@ void Game::setMatrixEntry(int x, int y, char val) {
     }
 };
 
+std::string Game::getDestination() {
+    return end_;
+};
 
 //================================================================================
 // Private functions.

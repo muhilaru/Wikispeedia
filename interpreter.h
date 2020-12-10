@@ -8,7 +8,7 @@
 class Interpreter {
 	public:
         const int MIN_GAME_SIZE = 10;
-        const std::string COMMAND_INVALID = "You entered an invalid command. Please try again.";
+        const std::string COMMAND_INVALID = "[Wikispeedia] You entered an invalid command. Please try again.";
 
         // Default constructor that outputs messages to std::cout.
 		Interpreter();
@@ -31,4 +31,6 @@ class Interpreter {
 		std::string getValidPathsStr();
 		// Prints out current vertex state (Different if you are at beginning or ending node)
 		std::string getCurrentVertexStr();
+
+		std::string getStatusStr();
 };

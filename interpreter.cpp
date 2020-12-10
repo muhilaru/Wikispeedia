@@ -14,13 +14,29 @@ Interpreter::Interpreter() {
 
 // Takes the initial input.
 std::string Interpreter::processStartInput(std::string input) {
-    if (input == "start") {
+    if (input == "READ") {
         createGame(MIN_GAME_SIZE);
-        std::cout << "Reading dataset..." << std::endl;
+
+        std::cout << "[Wikispeedia] Reading dataset..." << std::endl;
         readFromDataset("data/articles.tsv", "data/links.tsv");
-        std::cout << "Reading Floyd-Warshall Matrix..." << std::endl;
+
+        std::cout << "[Wikispeedia] Reading pre-generated matrix..." << std::endl;
         readAdjacencyMatrix("data/shortest-path-distance-matrix.txt");
-        return "Created game.";
+
+        std::cout << "[Wikispeedia] Creating game..." << std::endl;
+        game_->createRandomGame();
+
+        return getStatusStr();
+    } else if (input == "GENERATE") {
+        createGame(MIN_GAME_SIZE);
+
+        std::cout << "[Wikispeedia] Reading dataset..." << std::endl;
+        readFromDataset("data/articles.tsv", "data/links.tsv");
+
+        std::cout << "[Wikispeedia] Generating adjacency matrix... (WILL TAKE A LONG LONG LONG TIME)";
+        game_->createRandomGame();
+
+        return getStatusStr();
     } else {
         return COMMAND_INVALID;
     }
@@ -28,7 +44,11 @@ std::string Interpreter::processStartInput(std::string input) {
 
 // Takes the input during the game.
 std::string Interpreter::processGameInput(std::string input) {
-    return COMMAND_INVALID;
+    if (game_->moveTo(input)) {
+        return getStatusStr();
+    } else {
+        return COMMAND_INVALID;
+    }
 };
 
 // Add all vertices and edges from dataset into game/graph.
@@ -87,20 +107,22 @@ void Interpreter::createGame(Vertex start, Vertex end) {
 
 // Prints out valid paths to console
 std::string Interpreter::getValidPathsStr() {
-    string list_of_paths = "";
+    string list_of_paths = "[Wikispeedia] You are able to travel to:\n\t";
     for (unsigned k = 0; k < game_->getValidPaths().size(); k++) {
         list_of_paths += game_->getValidPaths()[k];
-        
         if (k != game_->getValidPaths().size() - 1) {
-            list_of_paths += "\n";
+            list_of_paths += "\n\t";
         }
-
     }
-    
     return list_of_paths;
 };
 
 // Prints out current vertex state (Different if you are at beginning or ending node)
 std::string Interpreter::getCurrentVertexStr() {
-    return game_->getCurrVertex();
+    return "[Wikispeedia] You are currently at: " + game_->getCurrVertex() + "\n[Wikispeedia] Your target is: " + game_->getDestination();
+};
+
+// Returns "current status" string.
+std::string Interpreter::getStatusStr() {
+    return getCurrentVertexStr() + "\n" + getValidPathsStr() + "\n[Wikispeedia] Enter the title of the page you'd like to travel:";
 };
