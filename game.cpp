@@ -47,15 +47,9 @@ void Game::createRandomGame() {
 
             if (index >= random && dist_matrix[i][j] <= max) {
                
-
-               for (auto it = page_map.begin(); it != page_map.end(); it++) {
-                   if (it->second == (int) i) {
-                       start_ = it->first;
-                       current_ = start_;
-                   } else if (it->second == (int) j) {
-                       end_ = it->first;
-                   }
-               }
+                start_ = articles.at(i);
+                current_ = start_;
+                end_ = articles.at(j);
 
                path_taken_.push(start_);
 
@@ -70,14 +64,11 @@ void Game::createRandomGame() {
     }
 
     if (reserve_i != -1 && reserve_j != -1) {
-        for (auto it = page_map.begin(); it != page_map.end(); it++) {
-            if (it->second == reserve_i) {
-                start_ = it->first;
-                current_ = start_;
-            } else if (it->second == reserve_j) {
-                end_ = it->first;
-            }
-        }
+
+        start_ = articles.at(reserve_i);
+        current_ = start_;
+        end_ = articles.at(reserve_j);
+        
 
         path_taken_.push(start_);
         return;

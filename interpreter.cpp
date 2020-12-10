@@ -16,7 +16,7 @@ Interpreter::Interpreter() {
 std::string Interpreter::processStartInput(std::string input) {
     if (input == "start") {
         createGame(MIN_GAME_SIZE);
-        readFromDataset("data/articles.tsv", "data/links.tsv")
+        readFromDataset("data/articles.tsv", "data/links.tsv");
         return "Created game.";
     } else {
         return COMMAND_INVALID;
