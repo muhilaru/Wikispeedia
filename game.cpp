@@ -92,6 +92,24 @@ int Game::calculateShortestPath() {
 
 };
 
+void Game::matrixToFile(std::vector<std::vector<int>> matrix) {
+
+    std::ofstream file;
+    file.open("matrix.txt");
+
+    for (int i = 0; i < articles.size(); i++) {
+        std::string line = "";
+        for (int j = 0; j < articles.size(); j++) {
+            if (matrix.at(i).at(j) == INF) {
+                line += "_";
+            } else {
+                line += to_string(matrix.at(i).at(j));
+            }
+        }
+        file << line << std::endl;
+    }
+}
+
 // Create matrix based on graph’s current state using Floyd Warshall’s Algorithm
 std::vector<std::vector<int>> Game::generateMatrix(Graph graph_, std::vector<Vertex> articles) {
 
