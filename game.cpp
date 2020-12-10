@@ -265,7 +265,7 @@ void Game::setMax(int m) {
 void Game::resetGameState() {
 
     path_taken_ = std::stack<Vertex>();
-    optimal_path_taken_.clear();
+    optimal_path_taken_ = std::stack<Vertex>();
     createRandomGame();
 
 }
