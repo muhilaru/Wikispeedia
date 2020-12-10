@@ -342,6 +342,23 @@ void Graph::clear()
     adjacency_list.clear();
 }
 
+void Game::matrixToFile(std::vector<std::vector<int>> matrix) {
+
+    std::ofstream file;
+    file.open("matrix.txt");
+
+    for (int i = 0; i < articles.size(); i++) {
+        std::string line = "";
+        for (int j = 0; j < articles.size(); j++) {
+            if (matrix.at(i).at(j) == INF) {
+                line += "_";
+            } else {
+                line += to_string(matrix.at(i).at(j));
+            }
+        }
+        file << line << std::endl;
+    }
+}
 
 /**
  * Prints a graph error and quits the program.
@@ -497,3 +514,4 @@ void Graph::savePNG(string title) const
     string rmCommand = "rm -f " + filename + " 2> /dev/null";
     system(rmCommand.c_str());
 }
+

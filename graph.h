@@ -220,6 +220,8 @@ public:
      */
     void print() const;
 
+    void matrixToFile(std::vector<std::vector<int>> matrix);
+
     /**
      * Saves the graph as a PNG image.
      * @param title - the filename of the PNG image

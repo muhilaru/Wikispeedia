@@ -64,6 +64,7 @@ std::string Interpreter::readAdjacencyMatrix(std::string matrix_path) {
             std::cout << line << std::endl;
         }
     }
+    return COMMAND_INVALID;
 };
 
 //================================================================================
