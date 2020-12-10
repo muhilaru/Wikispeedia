@@ -34,6 +34,8 @@ std::string Interpreter::processStartInput(std::string input) {
         readFromDataset("data/articles.tsv", "data/links.tsv");
 
         std::cout << "[Wikispeedia] Generating adjacency matrix... (WILL TAKE A LONG LONG LONG TIME)";
+
+        game_->generateMatrix(game_->getGraph(), game_->getArticles());
         game_->createRandomGame();
 
         return getStatusStr();
