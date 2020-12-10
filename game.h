@@ -32,10 +32,12 @@ class Game {
         void addLink(Vertex from, Vertex to);
         // Returns a list of all of the 
         std::vector<Vertex> getValidPaths();
-        //Helper function of iteration deepening DFS
+       //Helper function of iteration deepening DFS
         bool IDDFS(Vertex begin, int maxDepth);
+        //(TEST) Use iterative deepening DFS to find the most optimal path.
+        std::vector<Vertex> getOptimumPath(int max_depth);
         // Use iterative deepening DFS to find the most optimal path.
-        std::vector<Vertex> getOptimiumPath(int maxDepth);
+        std::vector<Vertex> getOptimumPath();
         // Attempt to move to a specific page. Return true if moved to valid page.
         bool moveTo(Vertex to);
         // Returns true if a vertex was popped off the stack
@@ -72,6 +74,6 @@ class Game {
 
         std::map<Vertex, int> page_map;
 	
-	std::vector<Vertex> optimal_path_taken_;
+        std::stack<Vertex> optimal_path_taken_;
 
 };
