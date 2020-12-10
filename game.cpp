@@ -107,6 +107,7 @@ std::vector<std::vector<int>> Game::generateMatrix(Graph graph_, std::vector<Ver
             }
         }
     }
+    matrixToFile(dist_matrix);
     return dist_matrix;
 };
 
