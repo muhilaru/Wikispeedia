@@ -24,8 +24,6 @@ class Game {
         void setMax(int m);
         // Create matrix based on graph’s current state using Floyd Warshall’s Algorithm
         std::vector<std::vector<int>> generateMatrix(Graph graph, std::vector<Vertex> articles);
-        // Reads in generated adjacency matrix
-        void readAdjacencyMatrix(string matrix_path);
         // Adds a vertex to the graph
         void addPage(Vertex vert);
         // Adds an edge to the graph

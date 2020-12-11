@@ -14,24 +14,8 @@ Game::Game() {
 // Creates game from predefined start and end.
 Game::Game(Vertex start, Vertex end) {
 
-    // int start_index = page_map[start];
-    // int end_index = page_map[end];
-
-    // if (dist_matrix[start_index][end_index] <= max) {
-
-    //     start_ = start;
-    //     current_ = start;
-    //     end_ = end;
-
-    //     path_taken_.push(start);
-    // } else {
-    //     std::cout << "The length of most optimal path for the game you specified exceeds the maximum length threshold of " << max << "." << std::endl;
-    //     std::cout << "A random game will now be created." << std::endl;
-    //     createRandomGame();
-    // }
     start_ = start;
     end_ = end;
-
 };
 
 // helper function to create random Game
@@ -114,16 +98,11 @@ std::vector<std::vector<int>> Game::generateMatrix(Graph graph_, std::vector<Ver
     return dist_matrix;
 };
 
-// Reads in generated adjacency matrix
-void Game::readAdjacencyMatrix(string matrix_path) {
-
-};
-
 // Adds a vertex to the graph
 void Game::addPage(Vertex vert) {
     graph_.insertVertex(vert);
 
-    //I need articles to be pushed in the order or the articles.tsv --chan
+    //need articles to be pushed in the order or the articles.tsv 
     articles.push_back(vert);
 
     //stores page to its index
@@ -133,7 +112,6 @@ void Game::addPage(Vertex vert) {
 // Adds an edge to the graph
 void Game::addLink(Vertex from, Vertex to) {
     graph_.insertEdge(from, to);
-
 };
 
 // Returns a list of all of the 
@@ -142,11 +120,8 @@ std::vector<Vertex> Game::getValidPaths() {
 };
 
 bool Game::IDDFS(Vertex begin, int maxDepth) {
-   // static std::unordered_set<Vertex> visited_;
-  //  std::cout << begin << std::endl;
-    //std::cout << maxDepth << std::endl;
+
     if (begin == end_) {
-           // optimal_path_taken_.push_back(begin);
         return true;
     } 
     if (maxDepth == 0) {
@@ -168,14 +143,12 @@ bool Game::IDDFS(Vertex begin, int maxDepth) {
 }
 
 // Use iterative deepening DFS to find the most optimal path.
-
 std::vector<Vertex> Game::getOptimumPath(int max_depth) {
     IDDFS(start_, max_depth);
     
     if (optimal_path_taken_.empty()) {
         return std::vector<Vertex>();
     }
-
     std::vector<Vertex> ret;
     ret.push_back(start_);
 

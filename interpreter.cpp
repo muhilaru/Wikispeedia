@@ -9,7 +9,7 @@
 
 // Default constructor with default ostream (std::cout).
 Interpreter::Interpreter() {
-    // game_ = new Game();
+
 };
 
 std::string Interpreter::processInput(std::string input) {
