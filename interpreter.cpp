@@ -46,7 +46,9 @@ std::string Interpreter::processStartInput(std::string input) {
 
 // Takes the input during the game.
 std::string Interpreter::processGameInput(std::string input) {
-    if (game_->moveTo(input)) {
+    if (input == "SOLVE") {
+        return game_->completedGame();
+    } else if (game_->moveTo(input)) {
         return getStatusStr();
     } else {
         return COMMAND_INVALID;

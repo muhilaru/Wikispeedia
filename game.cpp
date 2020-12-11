@@ -145,9 +145,8 @@ bool Game::IDDFS(Vertex begin, int maxDepth) {
 
     if (begin == end_) {
            // optimal_path_taken_.push_back(begin);
-           std::cout << "Found end." << std::endl;
-            return true;
-            
+        std::cout << "Found end." << std::endl;
+        return true;
     } 
     if (maxDepth == 0) {
         return false;
