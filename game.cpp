@@ -269,6 +269,43 @@ std::string Game::getDestination() {
     return end_;
 };
 
+void Game::completedGame() {
+
+    std::cout << "Congratulations, you've reached your destination!" << std::endl;
+    Graph user;
+    std::vector<Vertex> vert;
+
+    while (!path_taken_.empty()) {
+        vert.insert(vert.begin(), path_taken_.top());
+        user.insertVertex(path_taken_.top());
+        path_taken_.pop();
+    }
+
+    for (unsigned k = 0; k < vert.size() - 1; k++) {
+        user.insertEdge(vert[k], vert[k + 1]);
+    }
+
+    std::cout << "The path you took to reach your destination was:" << std::endl;
+    user.print();
+   
+    Graph optimal;
+    vert.clear();
+
+    while (!optimal_path_taken_.empty()) {
+        vert.insert(vert.begin(), optimal_path_taken_.top());
+        optimal.insertVertex(optimal_path_taken_.top());
+        optimal_path_taken_.pop();
+    }
+
+    for (unsigned k = 0; k < vert.size() - 1; k++) {
+        optimal.insertEdge(vert[k], vert[k + 1]);
+    }
+
+    std::cout << "The most optimal path from the start to destination page was:" << std::endl;
+    optimal.print();
+
+}
+
 //================================================================================
 // Private functions.
 //================================================================================
