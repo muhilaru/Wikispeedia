@@ -46,6 +46,10 @@ void Game::createRandomGame() {
     start_ = articles.at(a);
     end_ = articles.at(b);
     current_ = articles.at(a);
+    while (!path_taken_.empty()) {
+        path_taken_.pop();
+    }
+    path_taken_.push(current_);
 };
 
 // uses existing matrix to calculate shortest path between start and end using Floyd
