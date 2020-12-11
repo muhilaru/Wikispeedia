@@ -13,6 +13,10 @@ This is a game based on [The Wiki Game](https://www.thewikigame.com/group) and [
 ## How to Play
 In order to play the game, you must first build the project by using the ./make command and then run the executable file with ./wiki. After running these commands you will be able to interact with the game using the command line.
 
+In order to generate/read in your own matrix, you must add a file named "matrix.txt" to /data. If you choose to generate your own matrix, it will save the file to the root directory, where you must move it to data if you chose to use it later.
+
+If you find yourself stuck, type "GIVE UP" into the command line to see the solution, or type "BACK" to move back a move.
+
 ## Algorithms
 In our project implementation, we used two main algorithms on our Wikispeedia data set. The first algorithm we used was the [Floyd-Warshall algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm) to find the length of the most optimal path (least amount of edges) from a starting node in our graph of Wikipedia pages to a destination node. We accomplished this by generating an adjacency matrix that held the optimal path lengths from every possible start node to every possible destination node. This allowed us to determine if a potential start page and end page for a random game were valid (the nodes were connected in our graph) and within our maximum length threshold. We then used an [iterative deepening depth-first search](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search) that was optimized using the max depths given by Floyd-Warshall to determine the edges that compose the most optimal path from a start to a destination page. This allowed us to find the most optimal traversal path and display it to users after they successfully reach their destination or when they give up. 
 
