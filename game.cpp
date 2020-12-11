@@ -145,6 +145,7 @@ bool Game::IDDFS(Vertex begin, int maxDepth) {
 
     if (begin == end_) {
            // optimal_path_taken_.push_back(begin);
+           std::cout << "Found end." << std::endl;
             return true;
             
     } 
@@ -269,41 +270,36 @@ std::string Game::getDestination() {
     return end_;
 };
 
-void Game::completedGame() {
-
-    std::cout << "Congratulations, you've reached your destination!" << std::endl;
-    Graph user;
+std::string Game::completedGame() {
     std::vector<Vertex> vert;
+    path_taken_;
+    std::string taken_str;
+    std::string optimal_str;
 
     while (!path_taken_.empty()) {
-        vert.insert(vert.begin(), path_taken_.top());
-        user.insertVertex(path_taken_.top());
+        std::string title = path_taken_.top();
         path_taken_.pop();
+        if (path_taken_.empty()) {
+            taken_str = title + taken_str;
+        } else {
+            taken_str = " -> " + title + taken_str;
+        }
     }
 
-    for (unsigned k = 0; k < vert.size() - 1; k++) {
-        user.insertEdge(vert[k], vert[k + 1]);
-    }
-
-    std::cout << "The path you took to reach your destination was:" << std::endl;
-    user.print();
-   
-    Graph optimal;
-    vert.clear();
+    std::vector<Vertex> path = getOptimumPath();
+    std::cout << path.size() << std::endl;
 
     while (!optimal_path_taken_.empty()) {
-        vert.insert(vert.begin(), optimal_path_taken_.top());
-        optimal.insertVertex(optimal_path_taken_.top());
-        optimal_path_taken_.pop();
+        std::string title = optimal_path_taken_.top();
+        path_taken_.pop();
+        if (optimal_path_taken_.empty()) {
+            optimal_str = title + optimal_str;
+        } else {
+            optimal_str = " -> " + title + optimal_str;
+        }
     }
 
-    for (unsigned k = 0; k < vert.size() - 1; k++) {
-        optimal.insertEdge(vert[k], vert[k + 1]);
-    }
-
-    std::cout << "The most optimal path from the start to destination page was:" << std::endl;
-    optimal.print();
-
+    return "[Wikispeedia] Your path:\n" + taken_str + "\n[Wikispeedia] The optimal path:\n" + optimal_str;
 }
 
 //================================================================================

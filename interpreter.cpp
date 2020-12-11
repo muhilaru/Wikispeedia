@@ -126,5 +126,9 @@ std::string Interpreter::getCurrentVertexStr() {
 
 // Returns "current status" string.
 std::string Interpreter::getStatusStr() {
-    return getCurrentVertexStr() + "\n" + getValidPathsStr() + "\n[Wikispeedia] Enter the title of the page you'd like to travel:";
+    if (game_->isComplete()) {
+        return game_->completedGame();
+    } else {
+        return getCurrentVertexStr() + "\n" + getValidPathsStr() + "\n[Wikispeedia] Enter the title of the page you'd like to travel:";
+    }
 };

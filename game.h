@@ -55,7 +55,7 @@ class Game {
         //Resets instances variables to setup for a new game
         void resetGameState();
         // Prints out the user's path from start to end and the most optimal path
-        void completedGame();
+        std::string completedGame();
 
         void matrixToFile(std::vector<std::vector<int>> matrix);
 
