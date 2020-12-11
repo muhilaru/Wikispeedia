@@ -29,7 +29,7 @@ std::string Interpreter::processStartInput(std::string input) {
         readFromDataset("data/articles.tsv", "data/links.tsv");
 
         std::cout << "[Wikispeedia] Reading pre-generated matrix..." << std::endl;
-        readAdjacencyMatrix("data/shortest-path-distance-matrix.txt");
+        readAdjacencyMatrix("data/matrix.txt");
 
         std::cout << "[Wikispeedia] Creating game..." << std::endl;
         game_->createRandomGame();
