@@ -39,7 +39,6 @@ void Game::createRandomGame() {
     srand(time(NULL));
     int a = rand() % articles.size();
     int b = rand() % articles.size();
-    std::cout << a << "," << b << std::endl;
     while (a == b || dist_matrix[a][b] > max) {
         a = rand() % articles.size();
         b = rand() % articles.size();
@@ -142,10 +141,8 @@ bool Game::IDDFS(Vertex begin, int maxDepth) {
    // static std::unordered_set<Vertex> visited_;
   //  std::cout << begin << std::endl;
     //std::cout << maxDepth << std::endl;
-
     if (begin == end_) {
            // optimal_path_taken_.push_back(begin);
-        std::cout << "Found end." << std::endl;
         return true;
     } 
     if (maxDepth == 0) {
@@ -157,9 +154,10 @@ bool Game::IDDFS(Vertex begin, int maxDepth) {
                 optimal_path_taken_.push(adjNodes[i]);
                 return true;
             } else {
-                return false;
+                continue;
             }
         }
+        return false;
     } 
 
     return true;
@@ -168,24 +166,18 @@ bool Game::IDDFS(Vertex begin, int maxDepth) {
 // Use iterative deepening DFS to find the most optimal path.
 
 std::vector<Vertex> Game::getOptimumPath(int max_depth) {
-    // int start_ind = page_map[start_];
-    // int end_ind = page_map[end_];
-   
-
-   
     IDDFS(start_, max_depth);
+    
     if (optimal_path_taken_.empty()) {
         return std::vector<Vertex>();
     }
 
-     std::vector<Vertex> ret;
+    std::vector<Vertex> ret;
     ret.push_back(start_);
 
-    while (!optimal_path_taken_.empty()) {
-        
+    while (!optimal_path_taken_.empty()) {    
         ret.push_back(optimal_path_taken_.top());
         optimal_path_taken_.pop();
-        
     }
 
     return ret;
@@ -195,7 +187,7 @@ std::vector<Vertex> Game::getOptimumPath() {
     int start_ind = page_map[start_];
     int end_ind = page_map[end_];
     int max_depth = dist_matrix[start_ind][end_ind];
-    return getOptimumPath(max_depth);
+    return getOptimumPath(max_depth + 1);
 }
 
 // Attempt to move to a specific page. Return true if moved to valid page.
@@ -211,7 +203,7 @@ bool Game::moveTo(Vertex to) {
 // Returns true if a vertex was popped off the stack
 bool Game::moveBack() {
 
-    if (!path_taken_.empty()) {
+    if (path_taken_.size() > 1) {
         path_taken_.pop();
         current_ = path_taken_.top();
         return true;
@@ -286,19 +278,18 @@ std::string Game::completedGame() {
     }
 
     std::vector<Vertex> path = getOptimumPath();
-    std::cout << path.size() << std::endl;
 
-    while (!optimal_path_taken_.empty()) {
-        std::string title = optimal_path_taken_.top();
-        path_taken_.pop();
-        if (optimal_path_taken_.empty()) {
-            optimal_str = title + optimal_str;
+    for (int i = 0; i < path.size(); i++) {
+        std::string title = path[i];
+        if (i == 0) {
+            optimal_str = title;
         } else {
-            optimal_str = " -> " + title + optimal_str;
+            optimal_str = optimal_str + " -> " + title;
         }
     }
 
-    return "[Wikispeedia] Your path:\n" + taken_str + "\n[Wikispeedia] The optimal path:\n" + optimal_str;
+    current_ = end_;
+    return "[Wikispeedia] Your path:\n" + taken_str + "\n[Wikispeedia] The optimal path:\n" + optimal_str + "\n[Wikispeedia] Press enter to play again.";
 }
 
 //================================================================================

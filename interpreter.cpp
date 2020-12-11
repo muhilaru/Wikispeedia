@@ -12,6 +12,14 @@ Interpreter::Interpreter() {
     // game_ = new Game();
 };
 
+std::string Interpreter::processInput(std::string input) {
+    if (!init_) {
+        return processStartInput(input);
+    } else {
+        return processGameInput(input);
+    }
+};
+
 // Takes the initial input.
 std::string Interpreter::processStartInput(std::string input) {
     if (input == "READ") {
@@ -25,7 +33,7 @@ std::string Interpreter::processStartInput(std::string input) {
 
         std::cout << "[Wikispeedia] Creating game..." << std::endl;
         game_->createRandomGame();
-
+        init_ = true;
         return getStatusStr();
     } else if (input == "GENERATE") {
         createGame(MIN_GAME_SIZE);
@@ -37,21 +45,30 @@ std::string Interpreter::processStartInput(std::string input) {
 
         game_->generateMatrix(game_->getGraph(), game_->getArticles());
         game_->createRandomGame();
-
+        init_ = true;
         return getStatusStr();
     } else {
+        init_ = false;
         return COMMAND_INVALID;
     }
 };
 
 // Takes the input during the game.
 std::string Interpreter::processGameInput(std::string input) {
-    if (input == "SOLVE") {
-        return game_->completedGame();
-    } else if (game_->moveTo(input)) {
+    if (game_->isComplete()) {
+        game_->createRandomGame();
         return getStatusStr();
     } else {
-        return COMMAND_INVALID;
+        if (input == "GIVE UP") {
+            return game_->completedGame();
+        } else if (input == "BACK") {
+            game_->moveBack();
+            return getStatusStr();
+        } else if (game_->moveTo(input)) {
+            return getStatusStr();
+        } else {
+            return COMMAND_INVALID;
+        }
     }
 };
 

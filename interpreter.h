@@ -12,6 +12,8 @@ class Interpreter {
 
         // Default constructor that outputs messages to std::cout.
 		Interpreter();
+		// Processes all inputs.
+		std::string processInput(std::string input);
         // Takes the initial input, returns the output to the command line.
         std::string processStartInput(std::string input);
         // Takes the input during the game. Returns the output to the command line.
@@ -22,6 +24,7 @@ class Interpreter {
 		std::string readAdjacencyMatrix(std::string matrix_path);
 	private:
 		Game* game_;
+		bool init_ = false;
 
 		// Create random game with maximum path length
 		void createGame(int length);

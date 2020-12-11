@@ -14,20 +14,10 @@ int main(int argc, char *argv[]) {
     std::cout << "[Wikispeedia] READ - Reads in an adjacency matrix from a file, and starts the game. Super fast to start (3 seconds)." << std::endl;
 
     string input;
-    
-    bool init = true;
-
     Interpreter interpreter;
 
     while (getline(std::cin, input) && input != "exit") {
-
-      if (init) {
-        std::cout << interpreter.processStartInput(input) << std::endl;
-        init = false;
-      } else {
-        std::cout << interpreter.processGameInput(input) << std::endl;
-      }
-
+      std::cout << interpreter.processInput(input) << std::endl;
     }
 
   return 0;
