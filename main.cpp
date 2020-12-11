@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     string input;
     Interpreter interpreter;
 
-    while (getline(std::cin, input) && input != "exit") {
+    while (getline(std::cin, input) && input != "EXIT") {
       std::cout << interpreter.processInput(input) << std::endl;
     }
 
