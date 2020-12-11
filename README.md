@@ -1,4 +1,12 @@
 # Welcome to Wild Wikispeedia!
+[![Generic badge](https://img.shields.io/badge/release-v1.0.0-blue.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/build-passing-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/C++-14-cyan.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/contributors-3.5-yellow.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/cs225-final_project-orange.svg)](https://shields.io/)
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Soon%21/pink?icon=github)](https://github.com/Naereen/badges/)
+
+
 
 This is a game based on [The Wiki Game](https://www.thewikigame.com/group) and [Wikispeedia](https://dlab.epfl.ch/wikispeedia/play/). Players are given a start and a destination Wikipedia page and must navigate from the start page to the destination using the intermediary hyperlinks on each of the Wikipedia pages. In our game implementation, users can interact with the command-line to navigate forwards and backward from page to page in order to find their destination. After reaching the destination page or giving up, the user's path will be printed out alongside the most optimal (shortest) path that exists between the start and destination pages. Our game uses the [Stanford Network Analysis Project](https://snap.stanford.edu/index.html) (SNAP) [Wikispeedia data set](https://snap.stanford.edu/data/wikispeedia.html) which consists of over 4000 nodes (Wikipedia pages) and almost 120,000 edges (connections between pages).
 
