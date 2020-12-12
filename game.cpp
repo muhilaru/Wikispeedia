@@ -122,32 +122,35 @@ bool Game::IDDFS(Vertex begin, int maxDepth) {
 
     if (begin == end_) {
         return true;
-    } 
+    }
     if (maxDepth == 0) {
         return false;
-    } else if (maxDepth >= 0) {
-        auto adjNodes = graph_.getAdjacent(begin);
-        for (unsigned i = 0; i < adjNodes.size(); i++) {
-            if (IDDFS(adjNodes[i], maxDepth - 1)) {
-                optimal_path_taken_.push(adjNodes[i]);
-                return true;
-            } else {
-                continue;
-            }
-        }
-        return false;
-    } 
+    }
 
-    return true;
+    auto adjNodes = graph_.getAdjacent(begin);
+    for (unsigned i = 0; i < adjNodes.size(); i++) {
+        if (IDDFS(adjNodes[i], maxDepth - 1)) {
+            optimal_path_taken_.push(adjNodes[i]);
+            return true;
+        }
+    }
+    return false;
 }
 
 // Use iterative deepening DFS to find the most optimal path.
 std::vector<Vertex> Game::getOptimumPath(int max_depth) {
-    IDDFS(start_, max_depth);
+    //IDDFS(start_, max_depth);
     
+    for (int i = 0; i < max_depth + 4; i++) {
+        IDDFS(start_, i);
+        if (!optimal_path_taken_.empty()) {
+            break;
+        }
+    }
     if (optimal_path_taken_.empty()) {
         return std::vector<Vertex>();
     }
+
     std::vector<Vertex> ret;
     ret.push_back(start_);
 
