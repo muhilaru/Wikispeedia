@@ -209,7 +209,7 @@ TEST_CASE("Iterative DFS Test- Edge Case") {
   
   Graph graph = game.getGraph();
 
-  std::vector<Vertex> temp = game.getOptimumPath(3);
+  std::vector<Vertex> temp = game.getOptimumPath(0);
   
 
   REQUIRE(temp.size() == 0);
