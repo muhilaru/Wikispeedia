@@ -34,6 +34,6 @@ class Interpreter {
 		std::string getValidPathsStr();
 		// Prints out current vertex state (Different if you are at beginning or ending node)
 		std::string getCurrentVertexStr();
-
+		// Returns "current status" string
 		std::string getStatusStr();
 };

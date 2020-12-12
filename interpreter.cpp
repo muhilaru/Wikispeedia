@@ -8,9 +8,7 @@
 //================================================================================
 
 // Default constructor with default ostream (std::cout).
-Interpreter::Interpreter() {
-
-};
+Interpreter::Interpreter() {};
 
 std::string Interpreter::processInput(std::string input) {
     if (!init_) {
@@ -34,6 +32,7 @@ std::string Interpreter::processStartInput(std::string input) {
         std::cout << "[Wikispeedia] Creating game..." << std::endl;
         game_->createRandomGame();
         init_ = true;
+        std::cout << "[Wikispeedia] Enter HELP to list all valid commands" << std::endl;
         return getStatusStr();
     } else if (input == "GENERATE") {
         createGame(MIN_GAME_SIZE);
@@ -45,6 +44,7 @@ std::string Interpreter::processStartInput(std::string input) {
         game_->generateMatrix(game_->getGraph(), game_->getArticles());
         game_->createRandomGame();
         init_ = true;
+        std::cout << "[Wikispeedia] Enter HELP to list all valid commands" << std::endl;
         return getStatusStr();
     } else {
         init_ = false;
@@ -58,7 +58,9 @@ std::string Interpreter::processGameInput(std::string input) {
         game_->createRandomGame();
         return getStatusStr();
     } else {
-        if (input == "GIVE UP") {
+        if (input == "HELP") {
+            return "[Wikispeedia] Valid Commands:\n[Wikispeedia] GIVE UP - Will end current game and reveal the optimal solution path\n[Wikispeedia] BACK - Will return to the previous Wikipedia page visited\n[Wikispeedia] In order to move forward - enter the title of the page you'd like to travel EXACTLY how it appears in the list";
+        } else if (input == "GIVE UP") {
             return game_->completedGame();
         } else if (input == "BACK") {
             game_->moveBack();
@@ -96,6 +98,7 @@ std::string Interpreter::readFromDataset(std::string articles_path, std::string 
     return COMMAND_INVALID;
 };
 
+// Reads in an adjacency matrix from a file, rather than generating it (takes 40 mintutes on i7-10700k)
 std::string Interpreter::readAdjacencyMatrix(std::string matrix_path) {
     std::ifstream matrix(matrix_path);
     std::string line;
@@ -142,7 +145,7 @@ std::string Interpreter::getCurrentVertexStr() {
     return "[Wikispeedia] You are currently at: " + game_->getCurrVertex() + "\n[Wikispeedia] Your target is: " + game_->getDestination();
 };
 
-// Returns "current status" string.
+// Returns "current status" string
 std::string Interpreter::getStatusStr() {
     if (game_->isComplete()) {
         return game_->completedGame();

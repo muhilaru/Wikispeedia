@@ -32,9 +32,9 @@ class Game {
         std::vector<Vertex> getValidPaths();
         // Returns the destination title
         std::string getDestination();
-       //Helper function of iteration deepening DFS
+       // Helper function of iteration deepening DFS
         bool IDDFS(Vertex begin, int maxDepth);
-        //(TEST) Use iterative deepening DFS to find the most optimal path.
+        // (TEST) Use iterative deepening DFS to find the most optimal path.
         std::vector<Vertex> getOptimumPath(int max_depth);
         // Use iterative deepening DFS to find the most optimal path.
         std::vector<Vertex> getOptimumPath();
@@ -50,36 +50,35 @@ class Game {
         string getCurrVertex();
         // Returns current graph
         Graph getGraph();
-        //Resets instances variables to setup for a new game
+        // Resets instances variables to setup for a new game
         void resetGameState();
         // Prints out the user's path from start to end and the most optimal path
         std::string completedGame();
-
+        // Loads in and saves generated matrix to matrix.txt
         void matrixToFile(std::vector<std::vector<int>> matrix);
-
+        // Used to read in matrix and set values accordingly in the adjacency matrix instance variable
         void setMatrixEntry(int x, int y, char val);
-
+        // returns the list of verticies (Wiki pages)
         std::vector<Vertex> getArticles();
 	private:
-
+        // instance variables to track the start, end, and current Wiki pages during a game
 		Vertex start_;
 		Vertex end_;
 		Vertex current_;
+        // graph to represent all nodes and edges in the Wikispeedia data set
 		Graph graph_;
+        // holds all nodes (Wiki pages) a user visits in order
 		std::stack<Vertex> path_taken_;
-
         // the maximum length of the most optimal path from start to end (used when creating a new game)
         int max = 10;
-
+        // used to represent disconnected nodes in the distance adjacency matrix
         const int INF = 1e7;
-        //for generateMatrix() -- chan
+        // adjacency matrix to store all optimal path lengths from all possible start and end nodes
         std::vector<std::vector<int>> dist_matrix;
-
-        //I need the articles in order to use the indices for generateMatrix() -- chan
+        // holds all verticies of graph (Wiki pages)
         std::vector<Vertex> articles;
-
+        // maps verticies to indicies - used to access specific start and end nodes in the distance adjacency matrix
         std::map<Vertex, int> page_map;
-	
+        // initialized using iterative deepening DFS to calculate the shortest/most optimal path between two nodes (Wiki pages)
         std::stack<Vertex> optimal_path_taken_;
-
 };

@@ -7,13 +7,10 @@
 //================================================================================
 
 // Creates game from random beginning and end.
-Game::Game() {
-    
-};
+Game::Game() {};
 
 // Creates game from predefined start and end.
 Game::Game(Vertex start, Vertex end) {
-
     start_ = start;
     end_ = end;
 };
@@ -45,6 +42,7 @@ int Game::calculateShortestPath() {
 
 };
 
+// Loads in and saves generated matrix to matrix.txt
 void Game::matrixToFile(std::vector<std::vector<int>> matrix) {
 
     std::ofstream file;
@@ -119,6 +117,7 @@ std::vector<Vertex> Game::getValidPaths() {
     return graph_.getAdjacent(current_);
 };
 
+// Helper function of iteration deepening DFS
 bool Game::IDDFS(Vertex begin, int maxDepth) {
 
     if (begin == end_) {
@@ -160,6 +159,7 @@ std::vector<Vertex> Game::getOptimumPath(int max_depth) {
     return ret;
 };
 
+// Use iterative deepening DFS to find the most optimal path.
 std::vector<Vertex> Game::getOptimumPath() {
     int start_ind = page_map[start_];
     int end_ind = page_map[end_];
@@ -204,26 +204,29 @@ string Game::getCurrVertex() {
     return current_;
 }
 
+// Returns current graph
 Graph Game::getGraph() {
     return graph_;
 }
 
+// returns the list of verticies (Wiki pages)
 std::vector<Vertex> Game::getArticles() {
     return articles;
 }
 
+// sets the maximum length of the optimal path
 void Game::setMax(int m) {
     max = m;
 }
 
+// Resets instances variables to setup for a new game
 void Game::resetGameState() {
-
     path_taken_ = std::stack<Vertex>();
     optimal_path_taken_ = std::stack<Vertex>();
     createRandomGame();
-
 }
 
+// Used to read in matrix and set values accordingly in the adjacency matrix instance variable
 void Game::setMatrixEntry(int x, int y, char val) {
     int size = articles.size();
     if (dist_matrix.size() != size || dist_matrix[0].size() != size) {
@@ -234,10 +237,12 @@ void Game::setMatrixEntry(int x, int y, char val) {
     }
 };
 
+// Returns the destination title
 std::string Game::getDestination() {
     return end_;
 };
 
+// Prints out the user's path from start to end and the most optimal path
 std::string Game::completedGame() {
     std::vector<Vertex> vert;
     path_taken_;
